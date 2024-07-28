@@ -25,7 +25,7 @@ function HomePage() {
             </div>
             <div className="box">
               <h1>2000+</h1>
-              <h2>Property Ready</h2>
+              <h2>Property Ready..</h2>
             </div>
           </div>
         </div>
