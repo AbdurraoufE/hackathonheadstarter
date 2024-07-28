@@ -5,8 +5,8 @@ const auth = express.Router();
 
 auth.post("/register", register);
 
-// auth.post("/login", login);
+auth.post("/login", login);
 
-// auth.post("/logout", logout);
+auth.post("/logout", logout);
 
 export default auth;
