@@ -1,5 +1,6 @@
 import bcrypt from "bcrypt";
 import prisma from "../lib/prisma.js"; 
+import jsonwebtoken from "jsonwebtoken";
 
 export const register = async (req, res) => {
     const { username, email, password } = req.body;
@@ -49,7 +50,14 @@ export const login = async (req, res) => {
         //cookie token
 
         const age = 2500 * 24 * 60 * 60 * 7; // time for session to expire
-        res.cookie("test2", "cookietest", {
+
+        const jsontoken = jsonwebtoken.sign({
+            id: user.id,
+        }, 
+        process.env.JWT_SECRET_KEY,
+        {expiresIn: age});
+
+        res.cookie("jsontoken", jsontoken, {
             httpOnly: true,
             maxAge: age,
             //TODO Add this when website is live
