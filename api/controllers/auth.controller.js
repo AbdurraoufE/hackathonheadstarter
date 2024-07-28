@@ -1,10 +1,10 @@
-// api/controllers/auth.controller.js
 import bcrypt from "bcrypt";
-import prisma from "../lib/prisma.js";  // Adjusted to reflect the correct path
+import prisma from "../lib/prisma.js"; 
 
 export const register = async (req, res) => {
     const { username, email, password } = req.body;
     
+    try{
     // hashed password
     const hashedPass = await bcrypt.hash(password, 10);
     console.log(hashedPass);
@@ -19,11 +19,15 @@ export const register = async (req, res) => {
     });
     
     console.log(newUser);
-    res.status(201).json(newUser);  // Respond with the new user data
+    res.status(201).json({message:"User created"}); 
+    }catch(err){
+        console.log(err);
+        res.status(500).json({message:"Failed to create user [user already exists]"});
+    }
 };
 
 export const login = (req, res) => {
-    // database for login
+    //const { username, password } = req.body;
 };
 
 export const logout = (req, res) => {
