@@ -47,8 +47,14 @@ export const login = async (req, res) => {
         }
 
         //cookie token
-        res.setHeader('Set-Cookie', 'testcookie=' + 'cookevalue').json("Works");
 
+        const age = 2500 * 24 * 60 * 60 * 7; // time for session to expire
+        res.cookie("test2", "cookietest", {
+            httpOnly: true,
+            maxAge: age,
+            //TODO Add this when website is live
+            // secure: true
+            }).status(200).json({message:"Login successful"});
 
     }catch(err){
         console.log(err);
